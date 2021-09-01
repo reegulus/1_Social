@@ -1,9 +1,9 @@
 import React from "react";
-import './Profile.css'
+import style from './Profile.module.css'
 
 export function Profile() {
     return (
-        <div className={"profile"}>
+        <div className={style.profile}>
             <div>
                 <img src="https://miro.medium.com/max/750/1*sEMf5p6Gk3-zFjxeCB3aRw.jpeg" alt=""/>
             </div>
@@ -15,8 +15,14 @@ export function Profile() {
                 <div>
                     New post
                 </div>
-                <div>Post 1</div>
-                <div>Post 2</div>
+                <div className={style.posts}>
+                    <div className={style.item}>
+                        Post 1
+                    </div>
+                    <div className={style.item}>
+                        Post 2
+                    </div>
+                </div>
             </div>
         </div>
     )

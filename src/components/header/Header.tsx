@@ -1,9 +1,9 @@
 import React from "react";
-import './Header.css'
+import style from './Header.module.css'
 
 export function Header() {
     return (
-        <div className={"header"}>
+        <div className={style.header}>
             <header>
                 <h2>Web Dev</h2>
             </header>

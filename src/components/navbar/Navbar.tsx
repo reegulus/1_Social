@@ -5,23 +5,23 @@ export function Navbar() {
     return (
         <div className={style.nav}>
             <div className={`${style.item} ${style.active}`}>
-                <a>Profile</a>
+                <a href={"/profile"}>Profile</a>
             </div>
             <p/>
             <div className={style.item}>
-                <a>Message</a>
+                <a href={"/dialogs"}>Message</a>
             </div>
             <p/>
             <div className={style.item}>
-                <a>News</a>
+                <a href={"/news"}>News</a>
             </div>
             <p/>
             <div className={style.item}>
-                <a>Music</a>
+                <a href={"/music"}>Music</a>
             </div>
             <p/>
             <div className={style.item}>
-                <a>Settings</a>
+                <a href={"/settings"}>Settings</a>
             </div>
             <p/>
         </div>

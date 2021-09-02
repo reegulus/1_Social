@@ -1,14 +1,15 @@
 .nav {
     grid-area: n;
     outline: 2px solid #000;
-    text-decoration: none;
+
 }
-.item {
+.item a {
     color: cyan;
     margin: 12px 0px 0 12px;
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
+    text-decoration: none;
 }
-.item.active {
+.item a.activeLink {
     color: gold;
 }

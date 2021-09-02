@@ -11,7 +11,8 @@ export function MyPosts() {
                 <button>add</button>
             </div>
             <div className={style.post}>
-                <Post/>
+                <Post message={"How is it going?"} likesCount={'100k'}/>
+                <Post message={"What have you been up to?"} likesCount={'50k'}/>
             </div>
         </div>
     )

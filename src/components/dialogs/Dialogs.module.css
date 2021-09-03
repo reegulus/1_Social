@@ -1,0 +1,26 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+    /*grid-gap: 5px;*/
+    /*margin: 3px 3px 3px 3px;*/
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+}
+
+.dialogsItems {
+padding: 10px;
+
+}
+.dialogsItems .active {
+    color: gold;
+}
+.dialog {
+
+}
+.messages {
+padding: 10px;
+}
+
+.messages .message{
+
+}

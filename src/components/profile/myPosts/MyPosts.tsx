@@ -5,10 +5,14 @@ import {Post} from "./post/Post";
 export function MyPosts() {
     return (
         <div>
-            My posts
+            <h3>My posts</h3>
             <div>
-                <textarea></textarea>
-                <button>add</button>
+                <div>
+                    <textarea></textarea>
+                </div>
+                <div>
+                    <button>add</button>
+                </div>
             </div>
             <div className={style.post}>
                 <Post message={"How is it going?"} likesCount={'100k'}/>

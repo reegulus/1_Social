@@ -29,21 +29,37 @@ function Message(props: MessagePropsType) {
 }
 
 export function Dialogs() {
+
+    let dialogs = [
+        {id: 1, name: 'Jacob'},
+        {id: 2, name: 'William'},
+        {id: 3, name: 'Ethan'},
+        {id: 4, name: 'Michael'},
+        {id: 5, name: 'Harry'}
+    ]
+    let messages = [
+        {id: 1, message: 'I like to read books.'},
+        {id: 2, message: "My car won\'t start."},
+        {id: 3, message: 'They say, the winter will be cold.'},
+        {id: 4, message: ' It seems that you have made a rude mistake.'},
+        {id: 5, message: 'Dad has come!'},
+    ]
     return (
         <div className={style.dialogs}>
             <div className={style.dialogsItems}>
-                <DialogsItem name={'Jacob'} id={1}/>
-                <DialogsItem name={'William'} id={2}/>
-                <DialogsItem name={'Ethan'} id={3}/>
-                <DialogsItem name={'Michael'} id={4}/>
-                <DialogsItem name={'Harry'} id={5}/>
+                <DialogsItem name={dialogs[0].name} id={dialogs[0].id}/>
+                <DialogsItem name={dialogs[1].name} id={dialogs[1].id}/>
+                <DialogsItem name={dialogs[2].name} id={dialogs[2].id}/>
+                <DialogsItem name={dialogs[3].name} id={dialogs[3].id}/>
+                <DialogsItem name={dialogs[4].name} id={dialogs[4].id}/>
+
             </div>
             <div className={style.messages}>
-                <Message message={'I like to read books.'}/>
-                <Message message={"My car won\'t start."}/>
-                <Message message={'They say, the winter will be cold.'}/>
-                <Message message={' It seems that you have made a rude mistake.'}/>
-                <Message message={'Dad has come!'}/>
+                <Message message={messages[0].message}/>
+                <Message message={messages[1].message}/>
+                <Message message={messages[2].message}/>
+                <Message message={messages[3].message}/>
+                <Message message={messages[4].message}/>
                 </div>
             </div>
     )

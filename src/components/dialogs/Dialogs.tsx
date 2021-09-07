@@ -1,33 +1,7 @@
 import React from "react";
 import style from './Dialogs.module.css'
-import {NavLink} from "react-router-dom";
-
-
-type DialogsItemPropsType = {
-    id: number
-    name: string
-}
-
-function DialogsItem(props: DialogsItemPropsType) {
-    return (
-        <div className={style.dialog + ' ' + style.active}>
-            <NavLink to={'/dialogs/' + props.id}>{props.name}</NavLink>
-        </div>
-    )
-}
-
-
-type MessagePropsType = {
-    message: string
-}
-
-function Message(props: MessagePropsType) {
-    return (
-        <div className={style.message}>
-            {props.message}
-        </div>
-    )
-}
+import { DialogsItem } from "./dialogItem/DialogsItem";
+import {Message} from "./message/Message";
 
 export function Dialogs() {
 
@@ -57,15 +31,11 @@ export function Dialogs() {
                 {
                     dialogsElements
                 }
-
-
             </div>
             <div className={style.messages}>
                 {
                     messagesElements
                 }
-
-
             </div>
         </div>
     )

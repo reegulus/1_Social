@@ -6,7 +6,7 @@ type PostTypeProps = {
     post: Array<PostType>
 }
 
-export function Post(props: PostTypeProps) {
+function Post(props: PostTypeProps) {
     return (
         <div className={style.item}>
             {

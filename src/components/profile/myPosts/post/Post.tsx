@@ -8,7 +8,7 @@ type PostTypeProps = {
 
 function Post(props: PostTypeProps) {
     return (
-        <div className={style.item}>
+        /*<div className={style.item}>
             {
                 props.post.map(l => {
                     return(
@@ -18,7 +18,7 @@ function Post(props: PostTypeProps) {
                             <div>like: {l.likesCount}</div>
                         </div>
                     )
-                })}
+                })}*/
             </div>
     )
 }

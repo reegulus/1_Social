@@ -7,8 +7,10 @@ type MessagePropsType = {
 
 export function Message(props: MessagePropsType) {
     return (
-        <div className={style.message}>
-            {props.message}
+        <div className={style.messages}>
+            <div className={`${style.message} ${style.active}`}>
+                {props.message}
+            </div>
         </div>
     )
 }

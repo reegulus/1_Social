@@ -1,10 +1,10 @@
-.dialogsItems {
-    padding: 10px;
-
-}
-.dialogsItems .active {
-    color: gold;
-}
 .dialog {
+    padding: 10px;
+}
 
+.dialog a {
+    color: #3ad3d3;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
 }

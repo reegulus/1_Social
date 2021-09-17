@@ -17,9 +17,9 @@ export function MyPosts(props: MyPostsPropsType) {
         )
     let newPostElement: any = React.createRef()
     let addPost = () => {
-        debugger
         let text = newPostElement.current.value
         props.addPost(text)
+        newPostElement.current.value = ''
     }
     return (
         <div>

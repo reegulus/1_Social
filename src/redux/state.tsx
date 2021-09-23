@@ -1,5 +1,11 @@
-import {rerender} from "../index"
 // let rerenderEntireTree = () => {}
+
+let _onChange = () => {
+    console.log("Yo")
+}
+export const subscriber = (observer: () => void) => {
+    _onChange = observer
+}
 
 
 export type DialogType = {
@@ -28,17 +34,30 @@ export type RootStateType = {
     dialogsPage: DialogsPageType
 }
 
+
 export type StoreType = {
     _state: RootStateType
-    addPost: () => void
-    onChange: () => void
-    changeNewPostText: (newText: string) => void
-    subscribe: (observer:()=> void) => void
-    getState: ()=> RootStateType
+    _addPost: (addNewPost: string) => void
+    _onChange: () => void
+    _changeNewPostText: (newText: string) => void
+    subscriber: (observer: () => void) => void
+    getState: () => RootStateType
+    dispatch: (action: ActionsTypes) => void
+}
+
+export type ActionsTypes = AddPostAC | ChangeNewPostTextAC
+export type AddPostAC = {
+    type: 'ADD-POST'
+    addNewPost: string
+}
+
+export type ChangeNewPostTextAC = {
+    type: 'CHANGE-NEW-POST-TEXT'
+    newText: string
 }
 
 export let store: StoreType = {
-    _state:   {
+    _state: {
         profilePage: {
             posts: [
                 {id: 1, message: "How is it going?", likesCount: 50},
@@ -66,25 +85,36 @@ export let store: StoreType = {
         }
 
     },
-    addPost () {
+    _addPost(addNewPost: string) {
         const newPost: PostType = {
             id: 3,
-            message: this._state.profilePage.newPostText,
+            message: addNewPost,
             likesCount: 0
         }
         this._state.profilePage.posts.push(newPost)
         this._state.profilePage.newPostText = ""
-        rerender()
+        this._onChange()
     },
-    changeNewPostText (newText: string) {
+    _changeNewPostText(newText: string) {
         this._state.profilePage.newPostText = newText
-        this.onChange()
+        this._onChange()
     },
-    subscribe (observer: ()=> void) {
-        this.onChange = observer
+    subscriber(observer: () => void) {
+        this._onChange = observer
     },
-    onChange() {},
+    _onChange() {
+    },
     getState() {
         return this._state
+    },
+
+
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            this._addPost(action.addNewPost)
+        } else if (action.type === 'CHANGE-NEW-POST-TEXT') {
+            this._changeNewPostText(action.newText)
+        }
+
     }
 }

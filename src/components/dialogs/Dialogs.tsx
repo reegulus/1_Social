@@ -2,17 +2,18 @@ import React from "react";
 import style from './Dialogs.module.css'
 import {DialogsItem} from "./dialogItem/DialogsItem";
 import {Message} from "./message/Message";
-import {DialogsPageType} from "../../redux/state";
+import {ActionsTypes, DialogsPageType} from "../../redux/state";
 
 type DialogsPropsType = {
     dialogsPage: DialogsPageType
+    dispatch: (action: ActionsTypes) => void
 }
 
 export function Dialogs(props: DialogsPropsType) {
 
-    let dialogsElements = props.dialogsPage.dialogs.map(d => <DialogsItem name={d.name} id={d.id}/>)
+    let dialogsElements = props.dialogsPage.dialogs.map(d => <DialogsItem name={d.name} id={d.id} key={d.id}/>)
 
-    let messagesElements = props.dialogsPage.messages.map(m => <Message message={m.message}/>)
+    let messagesElements = props.dialogsPage.messages.map(m => <Message message={m.message} key={m.id}/>)
 let newMessageElements: any = React.createRef()
 
 let addMessage = () => {
@@ -29,6 +30,7 @@ let addMessage = () => {
             <div className={style.messages}>
                 {
                     messagesElements
+
                 }
                 <div>
                     <div>

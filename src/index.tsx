@@ -9,16 +9,17 @@ export function rerender() {
     ReactDOM.render(
         <React.StrictMode>
             <App store={store}
-                 state={store.getState()}
-                 addPost={store.addPost}
-                 changeNewPostText={store.changeNewPostText}
+                 state={store._state}
+                 addPost={store._addPost.bind(store)}
+                 changeNewPostText={store._changeNewPostText.bind(store)}
+                 dispatch={store.dispatch.bind(store)}
             />
         </React.StrictMode>, document.getElementById('root')
     );
 }
 
 
-store.subscribe(rerender)
+store.subscriber(rerender)
 rerender()
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

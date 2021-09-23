@@ -1,16 +1,19 @@
 import React from "react";
 import style from './MyPosts.module.css'
 import {Post} from "./post/Post";
-import {PostType} from "../../../redux/state";
+import {ActionsTypes, PostType} from "../../../redux/state";
 
 type MyPostsPropsType = {
     posts: Array<PostType>
-    addPost: (newPostText: string)=> void
-    changeNewPostText: (newText: string)=> void
     newPostText: string
+    dispatch: (action: ActionsTypes) => void
+    addPost: (addNewPost: string) => void
+    changeNewPostText: (newText: string) => void
 }
 
 export function MyPosts(props: MyPostsPropsType) {
+
+    let newPostElement = React.createRef<HTMLTextAreaElement>()
 
     const postsElements = props.posts
         .map(p => <Post
@@ -18,16 +21,17 @@ export function MyPosts(props: MyPostsPropsType) {
             likesCount={p.likesCount}/>
         )
 
-    let newPostElement: any = React.createRef()
-
     let addPost = () => {
-        let text = newPostElement.current.value
-        props.addPost(text)
-        props.changeNewPostText('')
+        props.addPost(props.newPostText)
+        /*   let text = newPostElement.current.value
+           props.addPost(text)
+           props.changeNewPostText('')*/
     }
     let onPostChange = () => {
-        let text = newPostElement.current.value
-        props.changeNewPostText(text)
+        if (newPostElement.current) {
+            let text = newPostElement.current.value
+            props.changeNewPostText(text)
+        }
     }
     return (
         <div>

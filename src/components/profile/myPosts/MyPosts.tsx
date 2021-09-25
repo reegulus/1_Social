@@ -13,19 +13,12 @@ type MyPostsPropsType = {
 
 export function MyPosts(props: MyPostsPropsType) {
 
-    let newPostElement = React.createRef<HTMLTextAreaElement>()
+    const newPostElement = React.createRef<HTMLTextAreaElement>()
 
-    const postsElements = props.posts
-        .map(p => <Post
-            message={p.message}
-            likesCount={p.likesCount}/>
-        )
+
 
     let addPost = () => {
         props.addPost(props.newPostText)
-        /*   let text = newPostElement.current.value
-           props.addPost(text)
-           props.changeNewPostText('')*/
     }
     let onPostChange = () => {
         if (newPostElement.current) {
@@ -41,14 +34,12 @@ export function MyPosts(props: MyPostsPropsType) {
                     <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText}/>
                 </div>
                 <div>
-                    <button onClick={addPost}>add
-                    </button>
+                    <button onClick={addPost}>add</button>
                 </div>
             </div>
             <div className={style.post}>
-                {
-                    postsElements
-                }
+                {/*{postsElements}*/}
+                <Post posts={props.posts}/>
             </div>
         </div>
     )

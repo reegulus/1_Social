@@ -15,15 +15,16 @@ export function MyPosts(props: MyPostsPropsType) {
 
     const newPostElement = React.createRef<HTMLTextAreaElement>()
 
-
-
     let addPost = () => {
-        props.addPost(props.newPostText)
+        if(newPostElement.current) {
+            props.dispatch({type: 'ADD-POST', addNewPost: props.newPostText})
+            props.changeNewPostText('')
+        }
     }
     let onPostChange = () => {
         if (newPostElement.current) {
-            let text = newPostElement.current.value
-            props.changeNewPostText(text)
+            const text = newPostElement.current.value
+            props.dispatch({type: 'CHANGE-NEW-POST-TEXT', newText: text})
         }
     }
     return (
@@ -38,7 +39,6 @@ export function MyPosts(props: MyPostsPropsType) {
                 </div>
             </div>
             <div className={style.post}>
-                {/*{postsElements}*/}
                 <Post posts={props.posts}/>
             </div>
         </div>

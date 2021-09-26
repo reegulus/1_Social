@@ -6,8 +6,6 @@ let _onChange = () => {
 export const subscriber = (observer: () => void) => {
     _onChange = observer
 }
-
-
 export type DialogType = {
     id: number
     name: string
@@ -50,7 +48,6 @@ export type AddPostAC = {
     type: 'ADD-POST'
     addNewPost: string
 }
-
 export type ChangeNewPostTextAC = {
     type: 'CHANGE-NEW-POST-TEXT'
     newText: string

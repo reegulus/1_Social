@@ -1,7 +1,7 @@
 // let rerenderEntireTree = () => {}
 
 let _onChange = () => {
-    console.log("Yo")
+    console.log("state")
 }
 export const subscriber = (observer: () => void) => {
     _onChange = observer
@@ -43,14 +43,19 @@ export type StoreType = {
     dispatch: (action: ActionsTypes) => void
 }
 
-export type ActionsTypes = AddPostAC | ChangeNewPostTextAC
-export type AddPostAC = {
-    type: 'ADD-POST'
-    addNewPost: string
+export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof changeNewPostTextAC>
+
+export const addPostAC = (addNewPost: string) => {
+    return {
+        type: "ADD-POST",
+        addNewPost: addNewPost
+    } as const
 }
-export type ChangeNewPostTextAC = {
-    type: 'CHANGE-NEW-POST-TEXT'
-    newText: string
+export const changeNewPostTextAC = (addNewPost: string)=> {
+    return {
+        type: "ADD-POST",
+        addNewPost: addNewPost
+    } as const
 }
 
 export let store: StoreType = {
@@ -104,7 +109,6 @@ export let store: StoreType = {
     getState() {
         return this._state
     },
-
 
     dispatch(action) {
         if (action.type === 'ADD-POST') {

@@ -7,18 +7,25 @@ import {ActionsTypes, DialogsPageType} from "../../redux/state";
 type DialogsPropsType = {
     dialogsPage: DialogsPageType
     dispatch: (action: ActionsTypes) => void
+    changeNewMessageText: (newMessage: string) => void
+
 }
 
 export function Dialogs(props: DialogsPropsType) {
 
-    let dialogsElements = props.dialogsPage.dialogs.map(d => <DialogsItem name={d.name} id={d.id} key={d.id}/>)
+    let dialogsElements = props.dialogsPage.dialogs
+        .map(d => <DialogsItem name={d.name} id={d.id} key={d.id}/>)
 
-    let messagesElements = props.dialogsPage.messages.map(m => <Message message={m.message} key={m.id}/>)
-let newMessageElements: any = React.createRef()
+    let messagesElements = props.dialogsPage.messages
+        .map(m => <Message message={m.message} key={m.id}/>)
+    let newMessageElements: any = React.createRef()
 
-let addMessage = () => {
-        let textMessage = newMessageElements.current.value
-        alert(textMessage)
+    let addMessage = () => {
+        if(newMessageElements.current) {
+            let textMessage = newMessageElements.current.value
+            props.changeNewMessageText(textMessage)
+        }
+
     }
     return (
         <div className={style.dialogs}>

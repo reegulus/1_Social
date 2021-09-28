@@ -15,6 +15,7 @@ type AppPropsType = {
     store: StoreType
     addPost: (addNewPost: string) => void
     changeNewPostText: (newText: string) => void
+    changeNewMessageText: (newMessage: string) => void
     dispatch: (action: ActionsTypes) => void
 }
 
@@ -35,6 +36,7 @@ export const App: React.FC<AppPropsType> = (props) => {
                         />}/>
                     <Route path={"/dialogs"} render={() =>
                         <Dialogs dialogsPage={props.state.dialogsPage}
+                                 changeNewMessageText={props.changeNewMessageText}
                                  dispatch={props.dispatch}
                         />}/>
                     <Route path={"/news"} render={() => <News/>}/>

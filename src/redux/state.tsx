@@ -26,6 +26,7 @@ export type ProfilePageType = {
 export type DialogsPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
+    newMessageText: string
 }
 export type RootStateType = {
     profilePage: ProfilePageType
@@ -38,12 +39,13 @@ export type StoreType = {
     _addPost: (addNewPost: string) => void
     _onChange: () => void
     _changeNewPostText: (newText: string) => void
+    _changeNewMessageText: (newMessage: string) => void
     subscriber: (observer: () => void) => void
     getState: () => RootStateType
     dispatch: (action: ActionsTypes) => void
 }
 
-export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof changeNewPostTextAC>
+export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof changeNewPostTextAC> | ReturnType<typeof changeNewMessageTextAC>
 
 export const addPostAC = (addNewPost: string) => {
     return {
@@ -51,10 +53,17 @@ export const addPostAC = (addNewPost: string) => {
         addNewPost: addNewPost
     } as const
 }
-export const changeNewPostTextAC = (addNewPost: string)=> {
+export const changeNewPostTextAC = (newText: string)=> {
     return {
-        type: "ADD-POST",
-        addNewPost: addNewPost
+        type: 'CHANGE-NEW-POST-TEXT',
+        newText: newText
+    } as const
+}
+
+export const changeNewMessageTextAC = (newMessage: string) => {
+    return {
+        type: 'CHANGE-NEW-MESSAGE-TEXT',
+        newMessage: newMessage
     } as const
 }
 
@@ -83,7 +92,8 @@ export let store: StoreType = {
                 {id: 3, message: 'They say, the winter will be cold.'},
                 {id: 4, message: ' It seems that you have made a rude mistake.'},
                 {id: 5, message: 'Dad has come!'},
-            ]
+            ],
+            newMessageText: ''
         }
 
     },
@@ -101,11 +111,15 @@ export let store: StoreType = {
         this._state.profilePage.newPostText = newText
         this._onChange()
     },
+    _changeNewMessageText(newMessage: string) {
+        this._state.dialogsPage.newMessageText = newMessage
+        this._onChange()
+    },
     subscriber(observer: () => void) {
         this._onChange = observer
     },
-    _onChange() {
-    },
+    _onChange() {},
+
     getState() {
         return this._state
     },
@@ -115,6 +129,8 @@ export let store: StoreType = {
             this._addPost(action.addNewPost)
         } else if (action.type === 'CHANGE-NEW-POST-TEXT') {
             this._changeNewPostText(action.newText)
+        } else if (action.type === 'CHANGE-NEW-MESSAGE-TEXT') {
+            this._changeNewMessageText(action.newMessage)
         }
 
     }

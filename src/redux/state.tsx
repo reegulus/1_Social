@@ -39,13 +39,14 @@ export type StoreType = {
     _addPost: (addNewPost: string) => void
     _onChange: () => void
     _changeNewPostText: (newText: string) => void
-    _changeNewMessageText: (newMessage: string) => void
+    _changeNewMessageText: (newMessageText: string) => void
+    _sendMessage: (newSendMessage: string)=> void
     subscriber: (observer: () => void) => void
     getState: () => RootStateType
     dispatch: (action: ActionsTypes) => void
 }
 
-export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof changeNewPostTextAC> | ReturnType<typeof changeNewMessageTextAC>
+export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof changeNewPostTextAC> | ReturnType<typeof changeNewMessageTextAC> | ReturnType<typeof newSendMessageTextAC>
 
 export const addPostAC = (addNewPost: string) => {
     return {
@@ -62,8 +63,14 @@ export const changeNewPostTextAC = (newText: string)=> {
 
 export const changeNewMessageTextAC = (newMessage: string) => {
     return {
-        type: 'CHANGE-NEW-MESSAGE-TEXT',
+        type: 'ADD-NEW-MESSAGE-TEXT',
         newMessage: newMessage
+    } as const
+}
+export const newSendMessageTextAC = (newSendMessage: string) => {
+    return {
+        type: 'SEND-MESSAGE',
+        newSendMessage: newSendMessage
     } as const
 }
 
@@ -115,6 +122,10 @@ export let store: StoreType = {
         this._state.dialogsPage.newMessageText = newMessage
         this._onChange()
     },
+    _sendMessage(newSendMessage: string) {
+      this._state.dialogsPage.newMessageText = newSendMessage
+      this._onChange()
+    },
     subscriber(observer: () => void) {
         this._onChange = observer
     },
@@ -129,8 +140,13 @@ export let store: StoreType = {
             this._addPost(action.addNewPost)
         } else if (action.type === 'CHANGE-NEW-POST-TEXT') {
             this._changeNewPostText(action.newText)
-        } else if (action.type === 'CHANGE-NEW-MESSAGE-TEXT') {
+        } else if (action.type === 'ADD-NEW-MESSAGE-TEXT') {
             this._changeNewMessageText(action.newMessage)
+        }else if (action.type === 'SEND-MESSAGE') {
+            let message = this._state.dialogsPage.newMessageText
+            this._state.dialogsPage.newMessageText = ''
+            this._state.dialogsPage.messages.push({id: 6, message: message})
+            this._onChange()
         }
 
     }

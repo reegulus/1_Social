@@ -63,7 +63,7 @@ export const changeNewPostTextAC = (newText: string)=> {
 
 export const changeNewMessageTextAC = (newMessage: string) => {
     return {
-        type: 'ADD-NEW-MESSAGE-TEXT',
+        type: 'CHANGE-NEW-MESSAGE-TEXT',
         newMessage: newMessage
     } as const
 }
@@ -140,7 +140,7 @@ export let store: StoreType = {
             this._addPost(action.addNewPost)
         } else if (action.type === 'CHANGE-NEW-POST-TEXT') {
             this._changeNewPostText(action.newText)
-        } else if (action.type === 'ADD-NEW-MESSAGE-TEXT') {
+        } else if (action.type === 'CHANGE-NEW-MESSAGE-TEXT') {
             this._changeNewMessageText(action.newMessage)
         }else if (action.type === 'SEND-MESSAGE') {
             let message = this._state.dialogsPage.newMessageText

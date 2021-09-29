@@ -17,17 +17,17 @@ export function Dialogs(props: DialogsPropsType) {
     let dialogsElements = props.dialogsPage.dialogs
         .map(d => <DialogsItem name={d.name} id={d.id} key={d.id}/>)
 
-    let messagesElements = props.dialogsPage.messages
+    const messagesElements = props.dialogsPage.messages
         .map(m => <Message message={m.message} key={m.id}/>)
-    let newMessageElements: any = React.createRef()
+    const newMessageElements = props.dialogsPage.newMessageText
 
-    const addMessage = (e: any) => {
-const newMessageText = e.currentTarget.value
-        props.dispatch(changeNewMessageTextAC(newMessageText))
+    const onSendMessageClick = () => {
+        props.dispatch(newSendMessageTextAC(newMessageElements))
     }
 
-    let changeSendMessage = () => {
-        props.dispatch(newSendMessageTextAC(newMessageText))
+    let changeSendMessage = (e: any) => {
+       const newMessageElements = e.currentTarget.value
+        props.dispatch(changeNewMessageTextAC(newMessageElements))
     }
     return (
         <div className={style.dialogs}>
@@ -42,10 +42,10 @@ const newMessageText = e.currentTarget.value
                 }
                 <div>
                     <div>
-                        <textarea onChange={changeSendMessage} ref={newMessageElements}></textarea>
+                        <textarea value={newMessageElements} onChange={changeSendMessage} placeholder={'Enter your message'} ></textarea>
                     </div>
                     <div>
-                        <button onClick={addMessage}>add</button>
+                        <button onClick={onSendMessageClick}>add</button>
                     </div>
                 </div>
             </div>

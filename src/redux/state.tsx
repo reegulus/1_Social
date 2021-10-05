@@ -1,4 +1,5 @@
-// let rerenderEntireTree = () => {}
+import {profileReducer, addPostAC, changeNewPostTextAC} from "./profile-reducer";
+import {changeNewMessageTextAC, dialogsReducer, newSendMessageTextAC} from "./dialogs-reducer";
 
 let _onChange = () => {
     console.log("state")
@@ -48,33 +49,7 @@ export type StoreType = {
 
 export type ActionsTypes = ReturnType<typeof addPostAC> | ReturnType<typeof changeNewPostTextAC> | ReturnType<typeof changeNewMessageTextAC> | ReturnType<typeof newSendMessageTextAC>
 
-export const addPostAC = (addNewPost: string) => {
-    return {
-        type: "ADD-POST",
-        addNewPost: addNewPost
-    } as const
-}
-export const changeNewPostTextAC = (newText: string)=> {
-    return {
-        type: 'CHANGE-NEW-POST-TEXT',
-        newText: newText
-    } as const
-}
-
-export const changeNewMessageTextAC = (newMessage: string) => {
-    return {
-        type: 'CHANGE-NEW-MESSAGE-TEXT',
-        newMessage: newMessage
-    } as const
-}
-export const newSendMessageTextAC = (newSendMessage: string) => {
-    return {
-        type: 'SEND-MESSAGE',
-        newSendMessage: newSendMessage
-    } as const
-}
-
-export let store: StoreType = {
+export const store: StoreType = {
     _state: {
         profilePage: {
             posts: [
@@ -136,18 +111,8 @@ export let store: StoreType = {
     },
 
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-            this._addPost(action.addNewPost)
-        } else if (action.type === 'CHANGE-NEW-POST-TEXT') {
-            this._changeNewPostText(action.newText)
-        } else if (action.type === 'CHANGE-NEW-MESSAGE-TEXT') {
-            this._changeNewMessageText(action.newMessage)
-        }else if (action.type === 'SEND-MESSAGE') {
-            let message = this._state.dialogsPage.newMessageText
-            this._state.dialogsPage.newMessageText = ''
-            this._state.dialogsPage.messages.push({id: 6, message: message})
-            this._onChange()
-        }
-
+        profileReducer(this._state.profilePage, action)
+        dialogsReducer(this._state.dialogsPage, action)
+        this._onChange()
     }
 }
